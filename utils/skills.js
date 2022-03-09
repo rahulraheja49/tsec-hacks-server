@@ -1,4 +1,9 @@
 const skills = [
+  "MERN",
+  "FERN",
+  "HTML",
+  "MEAN",
+  "CSS",
   "Algorithms",
   "Analytical Skills",
   "Big Data",

@@ -1,7 +1,11 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const skills = require("../utils/skills");
 
 const userSchema = new Schema({
+  username: {
+    type: String,
+  },
   fullName: {
     type: String,
   },
@@ -28,9 +32,9 @@ const userSchema = new Schema({
   },
   skills: [
     {
-      skill: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "skill",
+      value: {
+        type: String,
+        enum: skills,
       },
     },
   ],

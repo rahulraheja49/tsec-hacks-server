@@ -244,6 +244,30 @@ const allInvitations = async (req, res) => {
   }
 };
 
+const upvoteInvitation = async (req, res) => {
+  try {
+    const { invitationId } = req.body;
+
+    const invitation = await Invitation.findByIdAndUpdate(
+      invitationId,
+      {
+        $inc: {
+          upvote: 1,
+        },
+      },
+      {
+        new: true,
+        returnDocument: "after",
+      }
+    );
+
+    res.status(200).send(invitation);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ msg: "Internal Server Error", err });
+  }
+};
+
 module.exports = {
   createInvitation,
   getInvitations,
@@ -255,4 +279,5 @@ module.exports = {
   editRequest,
   addCollaborator,
   allInvitations,
+  upvoteInvitation,
 };

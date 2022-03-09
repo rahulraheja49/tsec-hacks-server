@@ -9,9 +9,9 @@ const discussionSchema = new Schema({
   },
   tags: [
     {
-      skill: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "skill",
+      value: {
+        type: String,
+        enum: skills,
       },
     },
   ],
@@ -22,10 +22,6 @@ const discussionSchema = new Schema({
   techStack: {
     type: String,
     required: true,
-  },
-  invitationId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "invitation",
   },
   upvote: {
     type: Number,

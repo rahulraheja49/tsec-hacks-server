@@ -11,12 +11,15 @@ exports.userAuth = async (req, res, next) => {
       return res.status(401).json({ msg: "No token, authorization denied" });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET_BCRYPT);
-    console.log(chalk.greenBright(decoded));
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded.id);
+    if (!user) {
+      return res.status(401).send({ msg: "User does not exist" });
+    }
     req.user = user;
     return next();
   } catch (err) {
+    console.log(err);
     return res.status(401).json({ msg: "Authorization failed" });
   }
 };

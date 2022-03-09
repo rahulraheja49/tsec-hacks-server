@@ -1,12 +1,14 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const skills = require("../utils/skills");
+
 const invitationSchema = new Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
   },
-  photo: {
+  pic: {
     type: String,
   },
   requirements: {
@@ -14,9 +16,9 @@ const invitationSchema = new Schema({
   },
   tags: [
     {
-      skill: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "skill",
+      value: {
+        type: String,
+        enum: skills,
       },
     },
   ],
@@ -39,6 +41,12 @@ const invitationSchema = new Schema({
     type: Number,
     default: 0,
   },
+  requests: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "request",
+    },
+  ],
 });
 
 const Invitation = mongoose.model("invitation", invitationSchema);

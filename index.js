@@ -11,6 +11,7 @@ const hpp = require("hpp");
 const app = express();
 const db = require("./config/db");
 const AuthRoutes = require("./routes/auth");
+const InvitationRoutes = require("./routes/invitation");
 
 db();
 app.use(cors());
@@ -31,6 +32,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/auth", AuthRoutes);
+app.use("/api/invitation", InvitationRoutes);
 
 const PORT = process.env.PORT || 5000;
 
@@ -44,5 +46,5 @@ app.listen(PORT, () => {
 
 // put: userUpdate, upvoteAnswer
 // get: getUser, getDiscussion, getInvitations, getRequests, getSkills
-// delete: deleteInvitation, deleteDiscussion, deleteAnswer
+// delete: deleteInvitation, deleteDiscussion, deleteAnswer, deleteRequest
 // post: createDiscussion, createInvitation, createAnswer, createRequest

@@ -1,20 +1,25 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const requestSchema = new Schema({
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "user",
+const requestSchema = new Schema(
+  {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
+    },
+    invitationId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "invitation",
+    },
+    why: {
+      type: String,
+      required: true,
+    },
   },
-  invitationId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "invitation",
-  },
-  why: {
-    type: String,
-    required: true,
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
 const Request = mongoose.model("request", requestSchema);
 

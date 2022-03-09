@@ -13,6 +13,7 @@ const db = require("./config/db");
 const AuthRoutes = require("./routes/auth");
 const InvitationRoutes = require("./routes/invitation");
 const UserRoutes = require("./routes/user");
+const DiscussionRoutes = require("./routes/discussion");
 
 db();
 app.use(cors());
@@ -35,6 +36,7 @@ app.use((req, res, next) => {
 app.use("/api/auth", AuthRoutes);
 app.use("/api/invitation", InvitationRoutes);
 app.use("/api/user", UserRoutes);
+app.use("/api/discussion", DiscussionRoutes);
 
 const PORT = process.env.PORT || 5000;
 

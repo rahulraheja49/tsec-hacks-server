@@ -42,8 +42,7 @@ app.listen(PORT, () => {
   console.log(chalk.cyanBright(`Listening on port ${PORT}`));
 });
 
-
-// put: userUpdate, 
-// get: getUser, 
-// delete: 
-// post: createDiscussion, createInvitation, postAnswer, createRequest
+// put: userUpdate, upvoteAnswer
+// get: getUser, getDiscussion, getInvitations, getRequests, getSkills
+// delete: deleteInvitation, deleteDiscussion, deleteAnswer
+// post: createDiscussion, createInvitation, createAnswer, createRequest

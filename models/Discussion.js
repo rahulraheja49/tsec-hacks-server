@@ -9,6 +9,9 @@ const discussionSchema = new Schema(
       ref: "user",
       required: true,
     },
+    title: {
+      type: String,
+    },
     tags: [
       {
         value: {

@@ -6,6 +6,7 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
+      default: "anonymous",
     },
     fullName: {
       type: String,
@@ -27,6 +28,8 @@ const userSchema = new Schema(
     },
     pic: {
       type: String,
+      default:
+        "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
     },
     resume: {
       type: String,

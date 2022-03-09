@@ -7,6 +7,7 @@ const getUser = async (req, res) => {
 
     res.status(200).send(user);
   } catch (err) {
+    console.log(err);
     res.status(500).send({ msg: "Internal Server Error", err });
   }
 };
@@ -15,6 +16,7 @@ const getSkills = async (req, res) => {
   try {
     res.status(200).send(skills);
   } catch (err) {
+    console.log(err);
     res.status(500).send({ msg: "Internal Server Error", err });
   }
 };
@@ -33,6 +35,7 @@ const userUpdate = async (req, res) => {
     });
     res.status(200).send(user);
   } catch (err) {
+    console.log(err);
     res.status(500).send({ msg: "Internal Server Error", err });
   }
 };

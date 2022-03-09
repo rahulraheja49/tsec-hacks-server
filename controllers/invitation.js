@@ -1,5 +1,6 @@
 const Invitation = require("../models/Invitation");
 const Request = require("../models/Request");
+const User = require("../models/User");
 
 const createInvitation = async (req, res) => {
   try {
@@ -28,17 +29,27 @@ const createInvitation = async (req, res) => {
 
     res.status(200).send(invitation);
   } catch (err) {
+    console.log(err);
     res.status(500).send({ msg: "Internal Server Error", err });
   }
 };
 
 const getInvitations = async (req, res) => {
   try {
-    const invitations = await Invitation.find({
+    let invitations = await Invitation.find({
       userId: req.user._id,
-    }).populate("requests");
+    })
+      .populate("requests")
+      .populate({ path: "userId", select: "username pic _id" });
+
+    invitations = await User.populate(invitations, {
+      path: "requests.userId",
+      select: "username pic _id",
+    });
+
     return res.status(200).send(invitations);
   } catch (err) {
+    console.log(err);
     res.status(500).send({ msg: "Internal Server Error", err });
   }
 };
@@ -67,6 +78,7 @@ const deleteInvitation = async (req, res) => {
   } catch (err) {
     await session.abortTransaction();
     session.endSession();
+    console.log(err);
     res.status(500).send({ msg: "Internal Server Error", err });
   }
 };
@@ -106,6 +118,7 @@ const createRequest = async (req, res) => {
 
     return res.status(200).send({ request, invitation });
   } catch (err) {
+    console.log(err);
     res.status(500).send({ msg: "Internal Server Error", err });
   }
 };
@@ -115,6 +128,7 @@ const getRequests = async (req, res) => {
     const requests = await Request.find({ userId: req.user._id });
     return res.status(200).send(requests);
   } catch (err) {
+    console.log(err);
     res.status(500).send({ msg: "Internal Server Error", err });
   }
 };
@@ -151,6 +165,7 @@ const deleteRequest = async (req, res) => {
   } catch (err) {
     await session.abortTransaction();
     session.endSession();
+    console.log(err);
     res.status(500).send({ msg: "Internal Server Error", err });
   }
 };

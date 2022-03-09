@@ -20,6 +20,7 @@ const createDiscussion = async (req, res) => {
 
     res.status(200).send(discussion);
   } catch (err) {
+    console.log(err);
     res.status(500).send({ msg: "Internal Server Error", err });
   }
 };
@@ -31,6 +32,7 @@ const getDiscussions = async (req, res) => {
       .populate(["userId", "answers"]);
     return res.status(200).send(discussions);
   } catch (err) {
+    console.log(err);
     res.status(500).send({ msg: "Internal Server Error", err });
   }
 };
@@ -59,6 +61,7 @@ const deleteDiscussion = async (req, res) => {
   } catch (err) {
     await session.abortTransaction();
     session.endSession();
+    console.log(err);
     res.status(500).send({ msg: "Internal Server Error", err });
   }
 };
@@ -96,6 +99,7 @@ const createAnswer = async (req, res) => {
 
     return res.status(200).send({ new_ans, discussion });
   } catch (err) {
+    console.log(err);
     res.status(500).send({ msg: "Internal Server Error", err });
   }
 };
@@ -132,6 +136,7 @@ const deleteAnswer = async (req, res) => {
   } catch (err) {
     await session.abortTransaction();
     session.endSession();
+    console.log(err);
     res.status(500).send({ msg: "Internal Server Error", err });
   }
 };

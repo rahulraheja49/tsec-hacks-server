@@ -233,6 +233,17 @@ const editRequest = async (req, res) => {
   }
 };
 
+const allInvitations = async (req, res) => {
+  try {
+    let invitations = await Invitation.find({}, "-requests -collaborators");
+
+    return res.status(200).send(invitations);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ msg: "Internal Server Error", err });
+  }
+};
+
 module.exports = {
   createInvitation,
   getInvitations,
@@ -243,4 +254,5 @@ module.exports = {
   editInvitation,
   editRequest,
   addCollaborator,
+  allInvitations,
 };

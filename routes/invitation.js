@@ -10,6 +10,7 @@ const {
   editInvitation,
   editRequest,
   addCollaborator,
+  allInvitations,
 } = require("../controllers/invitation");
 
 router
@@ -20,6 +21,8 @@ router
   .put(userAuth, addCollaborator);
 
 router.put("/:invitationId", userAuth, editInvitation);
+
+router.get("/all", allInvitations);
 
 router
   .route("/request")

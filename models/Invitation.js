@@ -38,10 +38,6 @@ const invitationSchema = new Schema(
     deadline: {
       type: Date,
     },
-    upvote: {
-      type: Number,
-      default: 0,
-    },
     requests: [
       {
         type: mongoose.Schema.Types.ObjectId,

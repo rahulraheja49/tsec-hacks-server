@@ -141,10 +141,35 @@ const deleteAnswer = async (req, res) => {
   }
 };
 
+const upvoteAnswer = async (req, res) => {
+  try {
+    const { answerId } = req.body;
+
+    const answer = await Answer.findByIdAndUpdate(
+      answerId,
+      {
+        $inc: {
+          upvote: 1,
+        },
+      },
+      {
+        new: true,
+        returnDocument: "after",
+      }
+    );
+
+    res.status(200).send(answer);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ msg: "Internal Server Error", err });
+  }
+};
+
 module.exports = {
   createDiscussion,
   getDiscussions,
   deleteDiscussion,
   createAnswer,
   deleteAnswer,
+  upvoteAnswer,
 };

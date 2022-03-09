@@ -55,6 +55,9 @@ const userSchema = new Schema(
       twitter: {
         type: String,
       },
+      devto: {
+        type: String,
+      },
     },
   },
   {

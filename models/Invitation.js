@@ -48,6 +48,12 @@ const invitationSchema = new Schema(
         ref: "request",
       },
     ],
+    collaborators: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user",
+      },
+    ],
   },
   {
     timestamps: true,

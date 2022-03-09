@@ -7,18 +7,26 @@ const {
   createRequest,
   getRequests,
   deleteRequest,
+  editInvitation,
+  editRequest,
+  addCollaborator,
 } = require("../controllers/invitation");
 
 router
   .route("/")
   .post(userAuth, createInvitation)
   .get(userAuth, getInvitations)
-  .delete(userAuth, deleteInvitation);
+  .delete(userAuth, deleteInvitation)
+  .put(userAuth, addCollaborator);
+
+router.put("/:invitationId", userAuth, editInvitation);
 
 router
   .route("/request")
   .post(userAuth, createRequest)
   .get(userAuth, getRequests)
   .delete(userAuth, deleteRequest);
+
+router.put("/request/:requestId", userAuth, editRequest);
 
 module.exports = router;

@@ -6,6 +6,7 @@ const {
   getDiscussions,
   createAnswer,
   deleteAnswer,
+  upvoteAnswer,
 } = require("../controllers/discussion");
 
 router
@@ -17,6 +18,7 @@ router
 router
   .route("/answer")
   .post(userAuth, createAnswer)
-  .delete(userAuth, deleteAnswer);
+  .delete(userAuth, deleteAnswer)
+  .put(userAuth, upvoteAnswer);
 
 module.exports = router;

@@ -40,10 +40,16 @@ const getInvitations = async (req, res) => {
       userId: req.user._id,
     })
       .populate("requests")
-      .populate({ path: "userId", select: "username pic _id" });
+      .populate({ path: "userId", select: "username pic _id" })
+      .populate({ path: "collaborators", select: "username pic _id" });
 
     invitations = await User.populate(invitations, {
       path: "requests.userId",
+      select: "username pic _id",
+    });
+
+    invitations = await User.populate(invitations, {
+      path: "collaborators.userId",
       select: "username pic _id",
     });
 
@@ -170,6 +176,63 @@ const deleteRequest = async (req, res) => {
   }
 };
 
+const editInvitation = async (req, res) => {
+  try {
+    const invitation = await Invitation.findByIdAndUpdate(
+      req.params.invitationId,
+      req.body,
+      {
+        new: true,
+        returnDocument: "after",
+      }
+    );
+    res.status(200).send(invitation);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ msg: "Internal Server Error", err });
+  }
+};
+
+const addCollaborator = async (req, res) => {
+  try {
+    const { invitationId, userId } = req.body;
+
+    const invitation = await Invitation.findByIdAndUpdate(
+      invitationId,
+      {
+        $addToSet: {
+          collaborators: userId,
+        },
+      },
+      {
+        new: true,
+        returnDocument: "after",
+      }
+    );
+    res.status(200).send(invitation);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ msg: "Internal Server Error", err });
+  }
+};
+
+const editRequest = async (req, res) => {
+  try {
+    const request = await Request.findByIdAndUpdate(
+      req.params.requestId,
+      req.body,
+      {
+        new: true,
+        returnDocument: "after",
+      }
+    );
+    res.status(200).send(request);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ msg: "Internal Server Error", err });
+  }
+};
+
 module.exports = {
   createInvitation,
   getInvitations,
@@ -177,4 +240,7 @@ module.exports = {
   createRequest,
   getRequests,
   deleteRequest,
+  editInvitation,
+  editRequest,
+  addCollaborator,
 };

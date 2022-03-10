@@ -131,7 +131,9 @@ const createRequest = async (req, res) => {
 
 const getRequests = async (req, res) => {
   try {
-    const requests = await Request.find({ userId: req.user._id });
+    const requests = await Request.find({ userId: req.user._id }).populate(
+      "invitationId"
+    );
     return res.status(200).send(requests);
   } catch (err) {
     console.log(err);

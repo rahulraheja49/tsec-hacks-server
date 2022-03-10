@@ -23,11 +23,13 @@ const getSkills = async (req, res) => {
 
 const userUpdate = async (req, res) => {
   try {
-    let skillsFormat = [];
-    req.body.skills.forEach((skill) => {
-      skillsFormat.push({ value: skill });
-    });
-    req.body.skills = skillsFormat;
+    if (req.body.skill?.length > 0) {
+      let skillsFormat = [];
+      req.body.skills.forEach((skill) => {
+        skillsFormat.push({ value: skill });
+      });
+      req.body.skills = skillsFormat;
+    }
 
     const user = await User.findByIdAndUpdate(req.user._id, req.body, {
       new: true,

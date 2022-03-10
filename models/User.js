@@ -42,22 +42,20 @@ const userSchema = new Schema(
         },
       },
     ],
-    social: {
-      github: {
-        type: String,
-      },
-      instagram: {
-        type: String,
-      },
-      linkedin: {
-        type: String,
-      },
-      twitter: {
-        type: String,
-      },
-      devto: {
-        type: String,
-      },
+    github: {
+      type: String,
+    },
+    instagram: {
+      type: String,
+    },
+    linkedin: {
+      type: String,
+    },
+    twitter: {
+      type: String,
+    },
+    devto: {
+      type: String,
     },
   },
   {

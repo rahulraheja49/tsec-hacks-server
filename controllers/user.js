@@ -23,9 +23,9 @@ const getSkills = async (req, res) => {
 
 const userUpdate = async (req, res) => {
   try {
-    if (req.body.skill?.length > 0) {
+    if (req.body.skills?.length > 0) {
       let skillsFormat = [];
-      req.body.skills.forEach((skill) => {
+      req.body.skills?.forEach((skill) => {
         skillsFormat.push({ value: skill });
       });
       req.body.skills = skillsFormat;

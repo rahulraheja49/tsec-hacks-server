@@ -237,7 +237,10 @@ const editRequest = async (req, res) => {
 
 const allInvitations = async (req, res) => {
   try {
-    let invitations = await Invitation.find({}, "-requests -collaborators");
+    let invitations = await Invitation.find(
+      {},
+      "-requests -collaborators"
+    ).populate("userId", "pic username");
 
     return res.status(200).send(invitations);
   } catch (err) {
